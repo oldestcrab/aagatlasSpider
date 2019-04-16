@@ -1,0 +1,53 @@
+2019-04-16 20:30:32 [scrapy.utils.log] INFO: Scrapy 1.6.0 started (bot: aagatlasSpider)
+2019-04-16 20:30:32 [scrapy.utils.log] INFO: Versions: lxml 4.2.5.0, libxml2 2.9.5, cssselect 1.0.3, parsel 1.5.1, w3lib 1.20.0, Twisted 18.9.0, Python 3.6.8 (tags/v3.6.8:3c6b436a57, Dec 24 2018, 00:16:47) [MSC v.1916 64 bit (AMD64)], pyOpenSSL 19.0.0 (OpenSSL 1.1.1b  26 Feb 2019), cryptography 2.6.1, Platform Windows-10-10.0.16299-SP0
+2019-04-16 20:30:32 [scrapy.crawler] INFO: Overridden settings: {'BOT_NAME': 'aagatlasSpider', 'DOWNLOAD_DELAY': 2.5, 'LOG_FILE': 'aagatlas.log', 'NEWSPIDER_MODULE': 'aagatlasSpider.spiders', 'SPIDER_MODULES': ['aagatlasSpider.spiders']}
+2019-04-16 20:30:32 [scrapy.extensions.telnet] INFO: Telnet Password: 2cc43983728a03cd
+2019-04-16 20:30:32 [scrapy.middleware] INFO: Enabled extensions:
+['scrapy.extensions.corestats.CoreStats',
+ 'scrapy.extensions.telnet.TelnetConsole',
+ 'scrapy.extensions.logstats.LogStats']
+2019-04-16 20:30:32 [scrapy.middleware] INFO: Enabled downloader middlewares:
+['aagatlasSpider.middlewares.RandomUserAgent',
+ 'scrapy.downloadermiddlewares.httpauth.HttpAuthMiddleware',
+ 'scrapy.downloadermiddlewares.downloadtimeout.DownloadTimeoutMiddleware',
+ 'scrapy.downloadermiddlewares.defaultheaders.DefaultHeadersMiddleware',
+ 'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware',
+ 'scrapy.downloadermiddlewares.retry.RetryMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.MetaRefreshMiddleware',
+ 'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware',
+ 'scrapy.downloadermiddlewares.redirect.RedirectMiddleware',
+ 'scrapy.downloadermiddlewares.cookies.CookiesMiddleware',
+ 'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware',
+ 'scrapy.downloadermiddlewares.stats.DownloaderStats']
+2019-04-16 20:30:32 [scrapy.middleware] INFO: Enabled spider middlewares:
+['scrapy.spidermiddlewares.httperror.HttpErrorMiddleware',
+ 'scrapy.spidermiddlewares.offsite.OffsiteMiddleware',
+ 'scrapy.spidermiddlewares.referer.RefererMiddleware',
+ 'scrapy.spidermiddlewares.urllength.UrlLengthMiddleware',
+ 'scrapy.spidermiddlewares.depth.DepthMiddleware']
+2019-04-16 20:30:32 [scrapy.middleware] INFO: Enabled item pipelines:
+[]
+2019-04-16 20:30:32 [scrapy.core.engine] INFO: Spider opened
+2019-04-16 20:30:32 [scrapy.extensions.logstats] INFO: Crawled 0 pages (at 0 pages/min), scraped 0 items (at 0 items/min)
+2019-04-16 20:30:32 [scrapy.extensions.telnet] INFO: Telnet console listening on 127.0.0.1:6023
+2019-04-16 20:30:33 [scrapy.core.scraper] ERROR: Error downloading <GET http://biokb.ncpsb.org/>
+Traceback (most recent call last):
+  File "D:\program\program_essential\Python36\virtualenv\spider_env\lib\site-packages\twisted\internet\defer.py", line 1418, in _inlineCallbacks
+    result = g.send(result)
+  File "D:\program\program_essential\Python36\virtualenv\spider_env\lib\site-packages\scrapy\core\downloader\middleware.py", line 37, in process_request
+    response = yield method(request=request, spider=spider)
+TypeError: process_request() got an unexpected keyword argument 'spider'
+2019-04-16 20:30:33 [scrapy.core.engine] INFO: Closing spider (finished)
+2019-04-16 20:30:33 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/exception_count': 1,
+ 'downloader/exception_type_count/builtins.TypeError': 1,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 4, 16, 12, 30, 33, 239221),
+ 'log_count/ERROR': 1,
+ 'log_count/INFO': 9,
+ 'scheduler/dequeued': 1,
+ 'scheduler/dequeued/memory': 1,
+ 'scheduler/enqueued': 1,
+ 'scheduler/enqueued/memory': 1,
+ 'start_time': datetime.datetime(2019, 4, 16, 12, 30, 32, 991556)}
+2019-04-16 20:30:33 [scrapy.core.engine] INFO: Spider closed (finished)
