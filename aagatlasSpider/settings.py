@@ -14,7 +14,18 @@ BOT_NAME = 'aagatlasSpider'
 SPIDER_MODULES = ['aagatlasSpider.spiders']
 NEWSPIDER_MODULE = 'aagatlasSpider.spiders'
 
-
+# MYSQL 地址
+MYSQL_HOST = 'localhost'
+# MYSQL 端口
+MYSQL_PORT = 3306
+# MYSQL 用户
+MYSQL_USER = 'bmnars'
+# MYSQL 密码
+MYSQL_PASSWORD = 'vi93nwYV'
+# MYSQL database
+MYSQL_DB = 'gene_disease'
+# MYSQL table
+MYSQL_TABLE = 'aagatlas_disease'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'aagatlasSpider (+http://www.yourdomain.com)'
 
@@ -79,9 +90,9 @@ DOWNLOADER_MIDDLEWARES = {
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'aagatlasSpider.pipelines.AagatlasspiderPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'aagatlasSpider.pipelines.AagatlasspiderPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html

@@ -10,7 +10,7 @@ from scrapy.conf import settings
 from random import choice
 
 class RandomUserAgent(object):
-    def process_request(self, request, response):
+    def process_request(self, request, spider):
         user_agent = choice(settings['USER_AGENTS'])
         request.headers.setdefault('User-Agent', user_agent)
 
