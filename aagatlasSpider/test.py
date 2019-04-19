@@ -1,17 +1,2 @@
-data = {
-    'GeneSymbol':'GeneSymbol',
-    'Disease':'Disease',
-    'PubMed_ID':'PubMed_ID',
-    'Sentence':'Sentence',
-    'update_time':'1'
-}
-# print(data)
-keys = ', '.join(x for x in data.keys())
-# print(keys)
-values = ', '.join(['%s']*len(data))
-# print(values)
-sql = 'insert in {table}({keys}) values({values});'.format(table='self.table', keys=keys, values=values)
-a = data.values()
-print(a)
-print(type(tuple(a)))
-print(tuple(a)*2)
+keywords = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+print(len(keywords))

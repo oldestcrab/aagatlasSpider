@@ -25,11 +25,13 @@ MYSQL_PASSWORD = 'vi93nwYV'
 # MYSQL database
 MYSQL_DB = 'gene_disease'
 # MYSQL table
-MYSQL_TABLE = 'aagatlas_disease'
+MYSQL_TABLE = 'aagatlas_disease_v2'
+MYSQL_TABLE_GENE = 'aagatlas_gene'
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'aagatlasSpider (+http://www.yourdomain.com)'
 
-LOG_FILE = 'aagatlas.log'
+# LOG_FILE = 'aagatlas_gene.log'
+LOG_FILE = 'aagatlas_disease_v2.log'
 LOG_LEVEL = 'DEBUG'
 
 USER_AGENTS = [
@@ -92,6 +94,7 @@ DOWNLOADER_MIDDLEWARES = {
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    'aagatlasSpider.pipelines.AagatlasspiderPipeline': 300,
+   # 'aagatlasSpider.pipelines.AagatlasGeneSpiderPipelines': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)

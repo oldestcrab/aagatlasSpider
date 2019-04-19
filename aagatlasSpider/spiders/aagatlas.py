@@ -6,52 +6,51 @@ from aagatlasSpider.items import AagatlasSpiderItem
 class AagatlasSpider(scrapy.Spider):
     name = 'aagatlas'
     allowed_domains = ['biokb.ncpsb.org']
-    start_urls = ['http://biokb.ncpsb.org/aagatlas/index.php/Home/Browse/disease?order=asc&offset=50&termName=a']
-    part_url = 'http://biokb.ncpsb.org/aagatlas/index.php/Home/Browse/disease?order=asc&termName='
-    offset = 0
-    keywords = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+    start_urls = ['http://biokb.ncpsb.org/aagatlas/index.php/Home/Browse/disease?order=asc&offset=0&limit=50&termName=a']
+    part_url = 'http://biokb.ncpsb.org/aagatlas/index.php/Home/Browse/disease?order=asc&&termName='
+    keywords = ['B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
     def parse(self, response):
         # 获取响应内容
         content = json.loads(response.text)
-        # 获取内容
+        # 获取当前termName的总条数
+        total = content['total']
+        # 获取termName内容
         rows = content['rows']
-        for each in rows:
-            # doid = each['id']
-            # print(doid)
-            # synonym = each['synonym']
-            # print(synonym)
-            # http://biokb.ncpsb.org/aagatlas/index.php/Home/Download/disease/term/cerebral%20astrocytoma/id/do~doid:3069
-            content_url = 'http://biokb.ncpsb.org/aagatlas/index.php/Home/Download/disease/term/' + each['synonym'] + '/id/' + each['id']
+        # print('count_row', len(rows))
+        # 当前termName
+        termName = rows[0]['index']
+        # 当前termName的总条目
+        page = (int(total)//100 + 1) * 100
+        # print(total, page)
+        # 真正爬取内容的url
+        next_url = self.part_url + termName + '&offset=' + str(page)
+        # 爬取所有termName条数
+        yield scrapy.Request(next_url, callback=self.parse_index)
 
-            yield scrapy.Request(content_url, callback=self.parse_content)
-
-        # 判断是否是第一次访问termName，是就访问剩余页数
-        if not response.meta.get('page'):
-            # 获取当前termName的总条数
-            total = content['total']
-            # print(total)
-            # 当前termName的总页数
-            page = int(total)//50 + 1
-            # print(page)
-
-            # 当前termName
-            termName = rows[0]['index']
-            # 爬取剩余的其他页数
-            for i in range(1, page):
-                # 下一页
-                next_url = self.part_url + termName + '&offset=' + str((i+1)*50)
-                # print(next_url)
-
-                yield scrapy.Request(next_url, callback=self.parse, meta={'page':page})
-            
         # 爬取其他所有termName
-        for kw in ['B','C']:
+        for kw in self.keywords:
             # 爬取其他所有termName的起始页面
-            kw_url = self.part_url + kw + '&offset=50'
+            kw_url = self.part_url + kw + '&limit=50'
 
             yield scrapy.Request(kw_url, callback=self.parse)
 
+    def parse_index(self, response):
+        # 获取响应内容
+        content = json.loads(response.text)
+        # 获取当前termName的总条数
+        total = content['total']
+        # print(total)
+        # 获取termName内容
+        rows = content['rows']
+        # print(response.url)
+        # print('count_row', total, len(rows))
+        for each in rows:
+            # http://biokb.ncpsb.org/aagatlas/index.php/Home/Download/disease/term/cerebral%20astrocytoma/id/do~doid:3069
+            # 下载数据的url
+            content_url = 'http://biokb.ncpsb.org/aagatlas/index.php/Home/Download/disease/term/' + each['synonym'] + '/id/' + each['id']
+            # print(content_url)
+            yield scrapy.Request(content_url, callback=self.parse_content)
             
     def parse_content(self, response):
         
@@ -75,5 +74,5 @@ class AagatlasSpider(scrapy.Spider):
             # print(item['Disease'])
             # print(item['PubMed_ID'])
             # print(item['Sentence'])
-
-            yield item
+            if len(item) == 4:
+                yield item

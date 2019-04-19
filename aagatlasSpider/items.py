@@ -15,3 +15,11 @@ class AagatlasSpiderItem(scrapy.Item):
     Disease = scrapy.Field()
     PubMed_ID = scrapy.Field()
     Sentence = scrapy.Field()
+
+class AagatlasGeneSpiderItem(scrapy.Item):
+    # define the fields for your item here like:
+    # name = scrapy.Field()
+    GeneSymbol = scrapy.Field()
+    Disease = scrapy.Field()
+    PubMed_ID = scrapy.Field()
+    Sentence = scrapy.Field()
